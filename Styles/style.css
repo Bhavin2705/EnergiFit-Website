@@ -25,12 +25,11 @@ body {
     transition: background-color 0.3s ease;
     white-space: nowrap;
     display: flex;
-    justify-content: space-between; /* Ensure proper alignment */
+    justify-content: space-between;
     align-items: center;
     padding-top: 2px;
     padding-bottom: 0px;
 }
-
 
 .navbar-brand .logo {
     width: 200px;
@@ -42,7 +41,7 @@ body {
     display: flex;
     justify-content: center;
     gap: 40px;
-    flex-grow: 1; /* Allow menu to take available space */
+    flex-grow: 1;
     color: hsl(180, 10%, 92%);
 }
 
@@ -115,9 +114,9 @@ body {
 }
 
 .dropdown-menu {
-    display: none; /* Hide initially */
+    display: none;
     position: absolute;
-    top: 100%; /* Ensure it's below the button */
+    top: 100%;
     left: 0;
     min-width: 10rem;
     padding: .5rem 0;
@@ -145,133 +144,132 @@ body {
     color: #ffffff;
 }
 
-/* Responsive Styles */
+/* Menu Toggle and Mobile Menu */
 .menu-icon {
     display: none;
     font-size: 22px;
     color: #00A8CC;
     cursor: pointer;
     transition: transform 0.3s ease;
-}
-.menu-icon.open {
-    transform: rotate(45deg); /* Cross effect */
+    margin-left: auto;
+    z-index: 1001;
 }
 
-/* Menu Toggle */
 #menuToggle {
     display: none;
 }
 
-#menuToggle:checked ~ .navbar-menu {
-    display: flex;
-    position: fixed;
-    top: 70px;
-    left: 0;
-    width: 100%;
-    background: #2c3e50;
-    flex-direction: column;
-    align-items: center;
-    gap: 10px;
-    padding: 20px 0;
-    transition: max-height 0.3s ease, opacity 0.3s ease;
-    max-height: 300px;
-    opacity: 1;
+.mobile-register {
+    display: none;
 }
 
-/* Breakpoints */
+/* Mobile Styles - Updated Section */
+@media (max-width: 992px) {
+    .menu-icon {
+        display: block;
+        /* margin-left: auto; */
+    }
+
+    #user-controls #registerNoww {
+        display: none;
+    }
+
+    .mobile-register {
+        display: block !important;
+        margin-top: 20px;
+        width: auto;
+        text-align: center;
+    }
+
+    .navbar-menu {
+        position: fixed;
+        top: 0;
+        right: -300px;
+        width: 300px;
+        height: 100vh;
+        background: #2c3e50;
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 80px 20px 20px;
+        transition: transform 0.3s ease-in-out;
+        z-index: 1000;
+    }
+
+    #menuToggle:checked ~ .navbar-menu {
+        transform: translateX(-300px);
+    }
+
+    .nav-link {
+        width: 100%;
+        padding: 12px 15px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    /* Overlay for mobile menu */
+    .navbar-overlay {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 999;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+    }
+
+    #menuToggle:checked ~ .navbar-overlay {
+        display: block;
+        opacity: 1;
+    }
+}
+
+/* Existing breakpoints */
 @media (max-width: 1400px) {
     .navbar-brand .logo {
-        width: 180px; /* Slightly smaller logo */
+        width: 180px;
     }
 }
 
 @media (max-width: 1200px) {
     .navbar-menu {
-        gap: 20px; /* Adjust gap */
+        gap: 20px;
     }
     
     #user-controls {
-        gap: 10px; /* Compact user controls */
-    }
-}
-
-
-/* Navbar Menu for Mobile */
-@media (max-width: 992px) {
-    .menu-icon {
-        display: block; /* Show the hamburger icon */
-        margin-right: 15px;
-    }
-
-    .navbar-menu {
-        display: none; /* Hide the menu initially */
-        position: fixed;
-        top: 70px;
-        left: 0;
-        width: 100%;
-        background: #2c3e50;
-        flex-direction: column;
-        align-items: center;
         gap: 10px;
-        padding: 20px 0;
-        transition: max-height 0.3s ease, opacity 0.3s ease;
-        max-height: 0; /* Initially collapsed */
-        opacity: 0;
-        overflow: hidden; /* Prevent items from spilling out */
-    }
-
-    #menuToggle:checked ~ .navbar-menu {
-        display: flex;
-        max-height: 300px;
-        opacity: 1;
-        overflow: visible; /* Allow content to expand */
-    }
-
-    #user-controls {
-        display: none; /* Hide user controls on smaller screens */
     }
 }
 
 @media (max-width: 768px) {
     .navbar-brand .logo {
-        width: 140px; /* Smaller logo */
+        width: 140px;
     }
+    
+    .navbar-menu {
+        width: 280px;
+    }
+    
     .navbar-menu a {
-        padding: 8px 0;
-        font-size: 14px; /* Adjust font size */
-    }
-    #menuToggle:checked ~ .navbar-menu {
-        max-height: 250px;
-        overflow-y: auto; /* Allow scroll if needed */
-        gap: 5px;
-    }
-    .menu-icon {
-        margin-right: 15px;
+        font-size: 14px;
     }
 }
 
 @media (max-width: 540px) {
     .navbar-brand .logo {
-        width: 130px; /* Adjust logo size */
+        width: 130px;
     }
-    .register-btn {
-        padding: 8px 20px; /* Adjust button padding */
+    
+    .navbar-menu {
+        width: 260px;
     }
+    
     .navbar-menu a {
         font-size: 13px;
+        padding: 10px 15px;
     }
 }
-
-@media (max-width: 400px) {
-    .navbar-brand .logo {
-        width: 110px; /* Smaller logo for very small screens */
-    }
-    .register-btn {
-        padding: 5px 15px; /* Further reduce padding */
-    }
-}
-
-
 
 
 
